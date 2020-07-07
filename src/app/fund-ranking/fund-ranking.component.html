@@ -1,0 +1,101 @@
+<!--Ranking-->
+<div class="card">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col">
+
+        <!-- Title -->
+        <h4 class="card-header-title">
+          Managers ranking
+        </h4>
+
+      </div>
+    </div> <!-- / .row -->
+  </div>
+  <div class="table-responsive mb-0">
+    <table class="table table-sm table-nowrap card-table">
+      <thead>
+        <tr>          
+          <th class="text-secondary">
+            Rank
+          </th>
+          <th class="text-secondary">
+            Manager
+          </th>
+          <th class="text-secondary">
+            KRO balance
+          </th>
+          <th class="text-secondary">
+            ROI since inception
+          </th>
+          <th class="text-secondary">
+            ROI in current cycle
+          </th>
+          <th class="text-secondary">
+            Lifetime commissions (DAI)
+          </th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr>          
+          <td>
+            {{userRanking}}
+          </td>
+          <td>
+            <div class="avatar avatar-sm mr-2">
+              <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+            </div>
+            You <i class="fe fe-star"></i>
+          </td>
+          <td>
+            {{userValue.toFixed(6)}}
+          </td>
+          <td>
+            <span [ngClass]="{'text-success': userROI.gt(0), 'text-danger': !(userROI.gt(0))}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': userROI.gt(0), 'fe-arrow-down-right': !(userROI.gt(0))}"></i>
+              {{handleNaN(userROI.toFixed(6))}}%
+            </span>
+          </td>
+          <td>
+            <span [ngClass]="{'text-success': userROI.gt(0), 'text-danger': !(userROI.gt(0))}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': userROI.gt(0), 'fe-arrow-down-right': !(userROI.gt(0))}"></i>
+              {{handleNaN(userROI.toFixed(6))}}%
+            </span>
+          </td>
+          <td>
+            {{userTotalCommission.toFixed(6)}}
+          </td>
+        </tr>
+        <tr *ngFor="let ranking of rankingArray; let i=index">
+          <td>
+            {{i+1}}
+          </td>
+          <td>
+            <a href="#" class="d-block text-truncate" style="width: 128px;">
+              <div class="avatar avatar-sm mr-2">
+                <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+              </div>
+              {{ranking.id}}
+            </a>
+          </td>
+          <td>
+            {{getManagerKairoBalance(ranking).toFixed(6)}}
+          </td>
+          <td>
+            <span [ngClass]="{'text-success': +ranking.kairoBalanceWithStake >= +ranking.baseStake, 'text-danger': +ranking.baseStake > +ranking.kairoBalanceWithStake}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': +ranking.kairoBalanceWithStake >= +ranking.baseStake, 'fe-arrow-down-right': +ranking.baseStake > +ranking.kairoBalanceWithStake}"></i>
+              {{handleNaN(getManagerKairoBalance(ranking).div(ranking.baseStake).minus(1).times(100).toFixed(6))}}%</span>
+          </td>
+          <td>
+            <span [ngClass]="{'text-success': +ranking.kairoBalanceWithStake >= +ranking.baseStake, 'text-danger': +ranking.baseStake > +ranking.kairoBalanceWithStake}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': +ranking.kairoBalanceWithStake >= +ranking.baseStake, 'fe-arrow-down-right': +ranking.baseStake > +ranking.kairoBalanceWithStake}"></i>
+              {{handleNaN(getManagerKairoBalance(ranking).div(ranking.baseStake).minus(1).times(100).toFixed(6))}}%</span>
+          </td>
+          <td>
+            {{formatNumber(ranking.totalCommissionReceived)}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

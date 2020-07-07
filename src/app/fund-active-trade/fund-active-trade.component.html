@@ -1,0 +1,91 @@
+<!-- Trades -->
+<div class="card">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col">
+
+        <!-- Title -->
+        <h4 class="card-header-title">
+          Active trades
+        </h4>
+
+      </div>
+    </div> <!-- / .row -->
+  </div>
+  <!--No active investment-->
+  <div class="card-body justify-content-center text-center" *ngIf="activeInvestmentList.length == 0">
+    <h3 class="mb-4" i18n="@@investmentsNoActiveInvestments">You have no active investment</h3>
+    <img class="w-50 mx-auto d-block" src="assets/img/illustrations/undraw_empty_xct9.svg" alt="zero-state-illustration">
+  </div>
+
+  <div class="table-responsive mb-0">
+    <table class="table table-sm table-nowrap card-table">
+      <thead *ngIf="activeInvestmentList.length != 0">
+        <tr>
+          <th class="text-secondary">
+            Asset
+          </th>
+          <th class="text-secondary">
+            Type
+          </th>
+          <th class="text-secondary">
+            KRO to redeem
+          </th>
+          <th class="text-secondary">
+            DAI to redeem
+          </th>
+          <th class="text-secondary">
+            ROI
+          </th>
+          <th class="text-secondary">
+            Date
+          </th>
+          <th class="text-secondary text-right">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr *ngFor="let data of activeInvestmentList">
+          <td>
+            <div class="avatar avatar-sm mr-2">
+              <img src={{getTokenLogoUrl(data.tokenSymbol)}} class="avatar-img rounded-circle" alt="{{data.tokenSymbol}} token logo">
+            </div>
+            {{data.tokenSymbol}}
+          </td>
+          <td>
+            <span *ngIf="!isOrderOfType(data, 'BasicOrder')">
+              <span class="badge" [ngClass]="{'badge-soft-success': data.safety, 'badge-soft-danger': !data.safety}">
+                <span class="text-secondary" *ngIf="!data.isShort">
+                  <ng-container i18n="@@orderOfTypeLong">Long</ng-container>&nbsp;{{data.leverage}}x
+                </span><span class="text-secondary" *ngIf="data.isShort">
+                  <ng-container i18n="@@orderOfTypeShort">Short</ng-container>&nbsp;{{data.leverage}}x
+                </span> • <span *ngIf="data.safety" i18n="@@orderSafetySafe">Safe</span><span
+                  *ngIf="!data.safety" i18n="@@orderSafetyInDanger">In Danger</span>
+              </span>
+            </span>
+          </td>
+          <td>
+            {{data.currValue.toFormat(4)}}
+          </td>
+          <td>
+            {{data.daiValue.toFormat(4)}}
+          </td>
+          <td>
+            <span [ngClass]="{'text-success': data.ROI.gte(0), 'text-danger': data.ROI.lt(0)}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': data.ROI.gte(0), 'fe-arrow-down-right': data.ROI.lt(0)}"></i>
+              {{data.ROI.toFormat(4)}}%>
+            </span>
+          </td>
+          <td>
+            <time datetime="2018-10-24">01/14/2020<br>11:37:07 AM</time>
+          </td>
+          <td class="text-right">
+            <button class="btn btn-sm btn-white mr-3" type="button" name="button" data-toggle="modal" data-target="#managerTopUpPosition">Top up</button>
+            <button class="btn btn-sm btn-primary" type="button" name="button" data-toggle="modal" data-target="#modalSell" (click)="openSellModal(data)" data-toggle="modal">Sell</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

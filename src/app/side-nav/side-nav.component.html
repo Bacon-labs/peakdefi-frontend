@@ -1,6 +1,108 @@
+<div class="container-fluid">
+
+  <!-- Toggler -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- User (xs) -->
+  <div class="navbar-user d-md-none">
+    <a href="/ranking" class="d-block mr-4">
+      <!-- Title -->
+      <h6 class="text-uppercase text-secondary mb-2">
+        Rank
+      </h6>
+      <!-- Heading -->
+      <span class="h4 mb-0 text-white">
+        #2
+      </span>
+    </a>
+    <!--Account display-->
+    <button class="btn btn-white btn-block p-0 pr-3 rounded-xl text-left" style="width: 12rem;" (click)="reloadAll()"
+    *ngIf="user_address !== ZERO_ADDR">
+      <div class="avatar avatar-sm avatar-online mr-2">
+        <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+      </div>
+      {{user_address}}
+    </button>
+    <button class="btn btn-white btn-block p-0 pr-3 rounded-xl text-left text-truncate" (click)="reloadAll()" *ngIf="user_address == ZERO_ADDR">
+      <div class="avatar avatar-sm avatar-offline mr-2">
+        <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+      </div>
+      <ng-container i18n="@@headerConnectWalletCTA">Connect Wallet</ng-container>
+    </button>
+
+  </div>
+
+  <!-- Collapse -->
+  <div class="collapse navbar-collapse" id="sidebarCollapse">
+    <a class="navbar-brand text-white text-center d-block mx-auto" href="/dashboard.html">
+      <div class="avatar mr-2">
+        <img src="assets/img/logo.png" class="avatar-img rounded" alt="...">
+      </div>
+      <span class="d-inline-block">PeakDeFi</span>
+    </a>
+    <hr class="navbar-divider my-3 d-lg-none">
+    <!-- Mobile time count-down -->
+    <div class="navbar-text px-3 pb-0 pb-2 w-100 justify-content-center text-center d-md-none">
+      <h6 class="header-pretitle mb-1">
+        <ng-container i18n="@@timeCounterTitle">Time left</ng-container>&nbsp;
+        <ng-container *ngIf="phase == 0" i18n="@@timeCounterActionIntermission">until managing begins</ng-container>
+        <ng-container *ngIf="phase == 1" i18n="@@timeCounterActionManage">to manage</ng-container>
+      </h6>
+      <h4 class="header-title">
+        {{days}}<ng-container i18n="@@timeLeftInDays">d</ng-container>&nbsp;{{hours}}<ng-container i18n="@@timeLeftInHours">h</ng-container>&nbsp;{{minutes}}<ng-container i18n="@@timeLeftInMinutes">m</ng-container>&nbsp;{{seconds}}<ng-container i18n="@@timeLeftInSeconds">s</ng-container>
+      </h4>
+    </div>
+    <hr class="navbar-divider my-3 d-lg-none">
+
+
+    <!-- Navigation -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="/dashboard">
+          <i class="fe fe-home"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/market">
+          <i class="fe fe-activity"></i> Market
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" data-toggle="modal" data-target="#buyRepToken">
+          <i class="fe fe-zap"></i> Become manager
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" data-toggle="modal" data-target="#createFund">
+          <i class="fe fe-plus"></i> Create fund
+        </a>
+      </li>
+    </ul>
+
+    <!-- Divider -->
+    <hr class="navbar-divider my-3">
+    <!-- Navigation -->
+    <ul class="navbar-nav mb-md-4">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.gitbook.com/" target="_blank">
+          Help
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" target="_blank">
+           Terms of service
+        </a>
+      </li>
+    </ul>
+
+  </div> <!-- / .navbar-collapse -->
+
+</div>
+
 <!-- NAVIGATION -->
 
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light py-1" id="sidebar">
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light py-1 d-none" id="sidebar">
   <div class="container-fluid">
 
     <!-- Toggler -->

@@ -28,6 +28,7 @@
             ],
             "styles": [
               "src/assets/scss/_user.scss",
+              "src/assets/scss/_user-variables.scss",
               "src/assets/fonts/feather/feather.css"
             ],
             "customWebpackConfig": {

@@ -2,51 +2,37 @@
 // user.scss
 // Use this to write your custom SCSS
 //
-.btn-twitter{
-    background-color: #1da1f2;
-    color: white;
+
+.rounded-xl{
+  border-radius: 20px
 }
-.btn-facebook{
-    background-color: #0078d7
+.modal-dialog-vertical{
+  max-width: 100%;
 }
-.input-xl{
-    font-size: 36px;
+
+// IDEA: background-colors
+.bg-dark-curved {
+  background-color: transparent!important;
+  background-image: radial-gradient(#131415,#131415 70%,transparent 70.1%);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 200% 150%;
 }
-.badge-xl{
-    font-size: 14px;
+.bg-dark{
+  background-color: #131415
 }
-.navbar-brand > img{
-    max-height: 2rem;
+// IDEA: buttons
+.btn-white-opacity{
+  width: 88px!important;
+  height: 88px!important;
+  background-color: rgba(255, 255, 255, 0.5);
 }
-.btn-success{
-    border-color: #1DC887;
-    background-color: #1DC887;
+@media (min-width: 1024px) {
+  .w-lg-60{width: 60%};
+  .w-lg-40{width: 40%}
 }
-.alert-success {
-    color: #fff;
-    border-color: #1DC887;
-    background-color: #1DC887;
+@media (max-width: 768px) {
+  .modal-dialog-vertical{
+    max-width: 100%;
+  }
 }
-.text-green{
-  color: #1DC887;
-}
-.bg-green{
-  background-color: #1DC887;
-}
-.bg-green-curved{background-color:transparent!important;background-image:radial-gradient(#1DC887,#19A670 70%,transparent 70.1%);background-repeat:no-repeat;background-position:bottom;background-size:200% 150%}
-.border-spot{
-  border-color: #2c7be5!important;
-  border-left-width: 3px!important;
-}
-.border-long{
-  border-color: #FF0DD2!important;
-  border-left-width: 3px!important;
-}
-.border-short{
-  border-color: #00FFC1!important;
-  border-left-width: 3px!important;
-}
-@media (min-width: 768px)
-{.main-content.custom-sidebar {
-    margin-left: 250px;
-}}

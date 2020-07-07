@@ -1,5 +1,163 @@
+<!-- MAIN CONTENT
+================================================== -->
+<div class="main-content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="container-fluid">
+
+      <!-- Body -->
+      <div class="header-body">
+        <div class="row align-items-end">
+          <div class="col">
+            <!-- Title -->
+            <h1 class="header-title display-3">
+              $210,000.00
+            </h1>
+            <!-- Pretitle -->
+            <div class="dropdown mb-0 d-flex align-items-center text-secondary mb-2">
+              Total portfolio value
+              <button class="btn btn-link pl-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                USD <i class="fe fe-chevron-down text-secondary"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                <a class="dropdown-item" href="#!">EUR</a>
+                <a class="dropdown-item" href="#!">BTC</a>
+                <a class="dropdown-item" href="#!">ETH</a>
+              </div>
+            </div>
+            <!-- Button -->
+            <a href="#" data-toggle="modal" data-target="#buyRepToken" class="btn btn-lg btn-primary lift mb-3">
+              <i class="fe fe-zap h3 mr-2 align-bottom"></i> Become manager
+            </a>
+            <div class="card-deck my-4">
+              <div class="card">
+                <div class="card-body">
+                  <!-- Title -->
+                  <h6 class="text-uppercase text-secondary mb-0">
+                    Total risk taken
+                    <button type="button" class="btn btn-link p-0 text-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
+                      <i class="fe fe-info h4"></i>
+                    </button>
+                  </h6>
+
+                  <!-- Heading -->
+                  <span class="h2 mb-0">
+                    96.02%
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <!-- Title -->
+                  <h6 class="text-uppercase text-secondary mb-0">
+                    Total est. commissions
+                    <button type="button" class="btn btn-link p-0 text-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
+                      <i class="fe fe-info h4"></i>
+                    </button>
+                  </h6>
+
+                  <!-- Heading -->
+                  <span class="h2 mb-0">
+                    {{expectedCommission.toFormat(4)}} DAI
+                  </span>
+                </div>
+              </div>
+            </div>
+            <ul class="nav nav-tabs header-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <span class="nav-link active text-center font-weight-bold h3 mb-0" id="fundsManaged-tab" data-toggle="tab" role="tab" aria-controls="fundsManaged" aria-selected="true">Funds managed</span>
+              </li>
+            </ul>
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .header-body -->
+
+    </div>
+  </div> <!-- / .header -->
+
+  <!-- CARDS -->
+  <div class="container-fluid mb-6">
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="funds" role="tabpanel" aria-labelledby="funds-tab">
+        <div class="row">
+          <div class="col-6">
+
+            <!-- fund  -->
+            <a routerLink="/fund">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col mb-3 mb-lg-0">
+
+                      <!-- Title -->
+                      <h6 class="text-uppercase text-secondary mb-3">
+                        Fund 1
+                      </h6>
+
+                      <!-- Heading -->
+                      <span class="h2 text-white mb-0 mr-2 d-block">
+                        $100,000.00
+                      </span>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <div class="avatar avatar-sm">
+                        <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+                      </div>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+              </div>
+            </a>
+
+          </div>
+          <div class="col-6">
+
+            <!-- fund  -->
+            <a href="fund">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col mb-3 mb-lg-0">
+
+                      <!-- Title -->
+                      <h6 class="text-uppercase text-secondary mb-3">
+                        Fund 2
+                      </h6>
+
+                      <!-- Heading -->
+                      <span class="h2 text-white mb-0 mr-2 d-block">
+                        $110,000.00
+                      </span>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <div class="avatar avatar-sm">
+                        <img src="assets/img/avatars/profiles/eth-address-1.png" class="avatar-img rounded-circle" alt="...">
+                      </div>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+    <app-footer></app-footer>
+    
+    
+  </div>
+
+</div><!-- / .main-content -->
 <!-- HEADER -->
-<div class="header bg-dark pb-5">
+<div class="header bg-dark pb-5 d-none">
   <div class="container-fluid px-md-5">
 
     <!-- Body -->
@@ -256,7 +414,7 @@
 </div> <!-- / .header -->
 
 <!-- CARDS -->
-<div class="container-fluid mt-n6 pb-7 px-md-5">
+<div class="container-fluid mt-n6 pb-7 px-md-5 d-none">
   <div class="card-deck mb-0 mb-md-4">
     <!-- Card -->
     <div class="card" data-toggle="tooltip" data-html="true">

@@ -1,0 +1,1014 @@
+<!-- MAIN CONTENT
+================================================== -->
+<div class="main-content">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="container-fluid">
+      <!-- Body -->
+      <div class="header-body">
+        <div class="row align-items-end">
+          <div class="col">
+            <div class="row justify-content-between align-items-center mb-2">
+              <div class="col">
+                <!-- Pretitle -->
+                <div class="text-secondary">
+                  Fund 1
+                </div>
+                <h1 class="display-3 mt-3 mb-0 d-none d-lg-block">
+                  {{portfolioValueInDAI.toFormat(4)}}
+                </h1>
+                <h1 class="display-4 mt-3 d-block d-lg-none">
+                  {{portfolioValueInDAI.toFormat(4)}}
+                </h1>
+                <!-- Pretitle -->
+                <div class="dropdown mb-0 d-flex align-items-center text-secondary mb-2">
+                  Portfolio value
+                  <button class="btn btn-link pl-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    USD <i class="fe fe-chevron-down text-secondary"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                    <a class="dropdown-item" href="#!">EUR</a>
+                    <a class="dropdown-item" href="#!">BTC</a>
+                    <a class="dropdown-item" href="#!">ETH</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-auto">
+
+                <div class="avatar avatar-sm d-flex d-lg-none">
+                  <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+                </div>
+                <div class="avatar avatar-xl d-none d-lg-flex">
+                  <img src="assets/img/avatars/profiles/eth-address.png" class="avatar-img rounded-circle" alt="...">
+                </div>
+
+              </div>
+            </div>
+            <div class="card-deck my-4">
+              <div class="card">
+                <div class="card-body">
+                  <!-- Title -->
+                  <h6 class="text-uppercase text-secondary mb-0">
+                    Rep. tokens balance
+                    <button type="button" class="btn btn-link p-0 text-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
+                      <i class="fe fe-info h4"></i>
+                    </button>
+                  </h6>
+
+                  <!-- Heading -->
+                  <span class="h2 mb-0">
+                    {{userValue.toFormat(4)}} <span class="text-success small align-top"><i class="fe fe-arrow-up-right"></i> {{userROI.toFormat(4)}}% current cycle</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <!-- Title -->
+                  <h6 class="text-uppercase text-secondary mb-0">
+                    Risk taken
+                    <button type="button" class="btn btn-link p-0 text-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
+                      <i class="fe fe-info h4"></i>
+                    </button>
+                  </h6>
+
+                  <!-- Heading -->
+                  <span class="h2 mb-0">
+                    {{riskTakenPercentage.toFormat(2)}}%
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <!-- Title -->
+                  <h6 class="text-uppercase text-secondary mb-0">
+                    Est. commissions (DAI)
+                    <button type="button" class="btn btn-link p-0 text-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
+                      <i class="fe fe-info h4"></i>
+                    </button>
+                  </h6>
+
+                  <!-- Heading -->
+                  <span class="h2 mb-0">
+                    {{expectedCommission.toFormat(4)}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- Button -->
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" data-toggle="modal" data-target="#modalBuy" (click)="openBuyModal(data)">
+              <i class="fe fe-plus h3 mr-2 align-bottom"></i> Trade
+            </button>
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" data-toggle="modal" data-target="#modalSell" (click)="openSellModal(data)">
+              Sell (test)
+            </button>
+            <ul class="nav nav-tabs header-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active text-center font-weight-bold h3 mb-0" id="stats-tab" data-toggle="tab" href="#stats" role="tab" aria-controls="stats" aria-selected="true">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-center font-weight-bold h3 mb-0" id="fundTrades-tab" data-toggle="tab" href="#fundTrades" role="tab" aria-controls="fundTrades" aria-selected="false">Trades</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-center font-weight-bold h3 mb-0" id="ranking-tab" data-toggle="tab" href="#ranking" role="tab" aria-controls="ranking" aria-selected="false">Ranking</a>
+              </li>
+            </ul>
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .header-body -->
+
+    </div>
+  </div> <!-- / .header -->
+
+  <!--  -->
+  <div class="container-fluid mb-6">
+    <div class="tab-content mb-5" id="myTabContent">
+      <div class="tab-pane fade show active" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+        <div class="row">
+          <div class="col-12 col-lg">
+            <div class="text-secondary mb-2">
+              Share price &bull; USD
+            </div>
+            <h2 class="h1 d-none d-lg-block">$10.0000 <span class="text-success small align-top"><i class="fe fe-arrow-up-right"></i> 27.45% today</span></h2>
+            <h2 class="h2 d-block d-lg-none">10.0000 <span class="text-success small align-top"><i class="fe fe-arrow-up-right"></i> 27.45% today</span></h2>
+          </div>
+          <div class="col-12 mb-4 mb-lg-0 col-lg-auto">
+            <div class="btn-group-toggle d-flex" data-toggle="buttons">
+              <label class="btn btn-white btn-sm col active">
+                <input type="radio" name="navColor" id="" value=""> 1D
+              </label>
+              <label class="btn btn-white btn-sm col ml-2">
+                <input type="radio" name="navColor" id="" value=""> 1W
+              </label>
+              <label class="btn btn-white btn-sm col ml-2">
+                <input type="radio" name="navColor" id="" value=""> 1M
+              </label>
+              <label class="btn btn-white btn-sm col ml-2">
+                <input type="radio" name="navColor" id="" value=""> 1A
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart my-4">
+          <canvas class="chart-canvas" id="overviewChart3"></canvas>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      PRICE CHANGE (CURRENT CYCLE)
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 text-success mb-0 mr-2">
+                      <i class="fe fe-arrow-up-right"></i> 42.17% (+$7.84)
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      APY
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 text-success mb-0 mr-2">
+                      <i class="fe fe-arrow-up-right"></i> 42.17%
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- / .row -->
+        <div class="row">
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      PRICE CHANGE (Since inception)
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 text-success mb-0 mr-2">
+                      <i class="fe fe-arrow-up-right"></i> 423.00% (+$700.00)
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      Assets under management
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 mb-0 mr-2">
+                      100,500.00 DAI
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- / .row -->
+        <div class="row">
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      MAX DRAWDOWN
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 text-white mb-0 mr-2">
+                      <i class="fe fe-arrow-down-right"></i>-7.39%
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-lg-6">
+
+            <!-- stat -->
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col mb-3 mb-lg-0">
+
+                    <!-- Title -->
+                    <h6 class="text-uppercase text-secondary mb-2">
+                      STANDARD DEVIATION
+                    </h6>
+
+                    <!-- Heading -->
+                    <span class="h2 text-white mb-0 mr-2">
+                      0.1406
+                    </span>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- / .row -->
+        <div class="row">
+          <div class="col-12">
+            <!-- fund details -->
+            <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col">
+
+                    <!-- Title -->
+                    <h4 class="card-header-title">
+                      Fund details
+                    </h4>
+
+                  </div>
+                </div> <!-- / .row -->
+              </div>
+              <div class="card-body">
+                
+              <div class="table-responsive mb-0">
+                <table class="table mb-0">
+                  <tbody>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Fund address</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        <a class="d-block text-truncate ml-auto" href="#" target="_blank" style="width: 6rem;">0x5200000000000000000000</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Management fee</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        0.1% of AUM
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Success fee</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        20.0% of profit
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Redemption fee</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        0%
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Fees period</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        27 days
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Fund's cycle</strong><br>
+                        <small class="text-white">Management phase</small><br>
+                        <small class="text-white">Investor sell phase</small><br>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        30 days <br>
+                        <small class="text-white">27 days</small><br>
+                        <small class="text-white">3 days</small>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-0 border-0">
+                        <strong>Time left before sell allowed</strong>
+                      </td>
+                      <td class="px-0 text-right border-0">
+                        1d 12h 24s
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="fundTrades" role="tabpanel" aria-labelledby="fundTrades-tab">
+        <div class="row">
+          <div class="col-12">
+            <app-fund-active-trade></app-fund-active-trade>
+            <app-fund-trade-history></app-fund-trade-history>
+          </div>
+        </div> <!-- / .row -->
+      </div>
+      <div class="tab-pane fade" id="ranking" role="tabpanel" aria-labelledby="ranking-tab">
+        <div class="row">
+          <div class="col-12">
+            <app-fund-ranking></app-fund-ranking>
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+
+</div><!-- / .main-content -->
+
+<!-- ModalBuy -->
+<div class="modal fade fixed-right" id="modalBuy" tabindex="-1" role="dialog" aria-labelledby="modalBuy" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-lg-0">
+        <div class="d-inline-block w-lg-60">
+          <button class="btn btn-link text-white position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
+            <i class="fe fe-arrow-left h2"></i>
+          </button>
+          <div class="row justify-content-center">
+            <div class="col col-lg-8">
+              <!-- Heading -->
+              <h1 class="display-4 text-center my-5">
+                Open position
+              </h1>
+
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="mt-1">Asset</label>
+                    <div class="input-group mb-4">
+                      <select class="custom-select custom-select-lg">
+                        <option value="fundtitle" *ngFor="let token of tokenData" (change)="selectInvestmentAsset(token.symbol)">
+                          {{token.symbol}} <ng-container *ngIf="isMarginToken(token.symbol)">&bull; Margin Trading</ng-container>
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group" *ngIf="isMarginToken(selectedTokenSymbol)">
+                    <label>Order type</label>
+                    <div class="input-group mb-4">
+                      <select class="custom-select custom-select-lg" id="orderTypeSelect"
+                      (change)="selectOrderType($event.target.selectedIndex)" *ngIf="isMarginToken(selectedTokenSymbol)">
+                        <option *ngFor="let orderType of orderTypes">
+                          {{orderType.text}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>KRO to stake</label>
+                    <div class="input-group mb-2">
+                      <input type="number" min="0.0" max={{kairoBalance.toFormat(18)}} class="form-control form-control-lg"
+                        aria-describedby="Kairo token amount to stake" placeholder="0.0 KRO" id="kairo-input"
+                        (input)="continueEnabled = true">
+                      <div class="input-group-append">
+                        <button class="btn border" name="button" type="button" (click)="maxStake()"
+                          i18n="@@modalCtaMax">Max</button>
+                      </div>
+                    </div>
+                    <small id="kroBalance"
+                    class="form-text text-secondary">{{kairoBalance.toFormat(18)}}&nbsp;KRO&nbsp;
+                    <ng-container i18n="@@modalBalanceAvailable">available</ng-container></small>
+                  </div>
+
+                  <div class="form-group" *ngIf="(selectedOrderType.leverage > 0 && selectedOrderType.type === 'compound') || selectedOrderType.type !== 'compound'">
+                    <label>Max. acceptable price</label>
+                    <div class="input-group input-group-lg mb-2">
+                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-right border-left-0" id="">%</span>
+                      </div>
+                    </div>
+                    <small class="form-text text-secondary">Your order WON'T be executed if the price goes up by more than this value.
+                    </small>  
+                  </div>
+                  <div class="form-group" *ngIf="!((selectedOrderType.leverage > 0 && selectedOrderType.type === 'compound') || selectedOrderType.type !== 'compound')">
+                    <label>Min. acceptable price</label>
+                    <div class="input-group input-group-lg mb-2">
+                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-right border-left-0" id="">%</span>
+                      </div>
+                    </div>
+                    <small class="form-text text-secondary">Your order WON'T be executed if the price goes down by more than this value.
+                    </small>  
+                  </div>
+
+                  <div class="form-group" *ngIf="selectedOrderType.type === 'basic'">
+                    <label>Liquidity provider</label><br>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="1inch" name="1inch" class="custom-control-input" [checked]="!useKyber"
+                        (input)="useKyber = false;">
+                      <label class="custom-control-label" for="1inch">1inch</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="kybernetwork" name="kybernetwork" class="custom-control-input"
+                        [checked]="useKyber" (input)="useKyber = true;">
+                      <label class="custom-control-label" for="kybernetwork">Kyber Network</label>
+                    </div>
+                  </div>
+
+                  <!-- All the components below are displayed if leveraged or shorted order option is selected -->
+                  <div *ngIf="isMarginToken(selectedTokenSymbol) && selectedOrderType.type !== 'basic'">
+                    <hr class="mb-4 mt-0">
+
+                    <!-- order details -->
+                    <div class="card card-inactive my-4">
+                      <div class="card-body">
+                        <!-- Payout -->
+                        <h6 class="header-pretitle" i18n="@@investmentsBuyModalMarginTradingPayoutTitle">
+                          Payout
+                        </h6>
+                        <p>
+                          <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText1">This order multiplies your returns
+                            by</ng-container>&nbsp;{{selectedOrderType.leverage}}x.
+                        </p>
+                        <!-- IDEA: leveraged order -->
+                        <p>
+                          <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText2a">
+                            If</ng-container>&nbsp;{{selectedTokenSymbol}}<ng-container
+                            i18n="@@investmentsBuyModalMarginTradingPayoutText2b">'s price</ng-container>&nbsp;<span
+                            class="text-success">+10%</span>,&nbsp;
+                          <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText2c">you</ng-container>&nbsp;<span
+                            class="text-success" *ngIf="selectedOrderType.leverage > 0">
+                            <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText2d">gain</ng-container>
+                            &nbsp;{{10 * selectedOrderType.leverage}}%
+                          </span><span class="text-danger" *ngIf="0 > selectedOrderType.leverage">
+                            <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText2e">lose</ng-container>
+                            &nbsp;{{-10 * selectedOrderType.leverage}}%
+                          </span>.
+                        </p>
+                        <p>
+                          <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText3a">If</ng-container>
+                          &nbsp;{{selectedTokenSymbol}}<ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText3b">'s
+                            price</ng-container>&nbsp;<span class="text-danger">-10%</span>,&nbsp;<ng-container
+                            i18n="@@investmentsBuyModalMarginTradingPayoutText3c">you</ng-container>&nbsp;
+                          <span class="text-danger" *ngIf="selectedOrderType.leverage > 0">
+                            <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText3d">lose</ng-container>
+                            &nbsp;{{10 * selectedOrderType.leverage}}%
+                          </span> <span class="text-success" *ngIf="0 > selectedOrderType.leverage">
+                            <ng-container i18n="@@investmentsBuyModalMarginTradingPayoutText3e">gain</ng-container>
+                            &nbsp;{{-10 * selectedOrderType.leverage}}%
+                          </span>.
+                        </p>
+
+                        <h6 class="header-pretitle" i18n="@@investmentsBuyModalMarginTradingLiquidationTitle">Liquidation</h6>
+                        <p>
+                          <ng-container i18n="@@investmentsBuyModalMarginTradingLiquidationText1">This order could be liquidated
+                            if its losses exceed a certain threshold (which will be displayed). If
+                            that happens, a large portion of your stake will be lost.</ng-container>&nbsp;<a
+                            href="https://betoken.gitbook.io/docs/manage-the-fund/what-would-cause-a-position-of-mine-to-get-liquidated"
+                            target="_blank">
+                            <ng-container i18n="@@investmentsBuyModalMarginTradingLiquidationText2">Learn More</ng-container>
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" aria-label="Invest" (click)="createInvestment()"
+                    [disabled]="!continueEnabled" i18n="@@modalCtaContinue">
+                    Continue
+                  </button>
+                </div>
+              </div>
+              <a class="btn btn-sm btn-link btn-block mb-6" href="https://gitbook.com" target="_blank">Need help?</a>
+            </div>
+          </div>
+        </div>
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
+          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- / modal -->
+
+<!-- Sell modal -->
+<div class="modal fade fixed-right" id="modalSell" tabindex="-1" role="dialog" aria-labelledby="modalSell" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-lg-0">
+        <div class="d-inline-block w-lg-60">
+          <button class="btn btn-link text-white position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
+            <i class="fe fe-arrow-left h2"></i>
+          </button>
+          <div class="row justify-content-center">
+            <div class="col col-lg-8">
+              <!-- Heading -->
+              <h1 class="display-4 text-center mt-5">
+                Sell position {{selectedTokenSymbol}}
+                <span class="text-secondary ml-2" *ngIf="!isOrderOfType(sellData, 'BasicOrder')">
+                  <span *ngIf="!sellData.isShort" i18n="@@orderOfTypeLong">Long</span><span *ngIf="sellData.isShort"
+                    i18n="@@orderOfTypeShort">Short</span>&nbsp;•&nbsp;<ng-container
+                    i18n="@@investmentsModalSellOrderLeverage">Leverage</ng-container>
+                  {{sellData.leverage}}x
+                </span>
+              </h1>
+              <div class="mb-4 text-center">
+                <time class="header-pretitle h6 mb-0">
+                  <ng-container i18n="@@investmentsModalSellOrderBuyTime">OPENED</ng-container>
+                  &nbsp;{{toDateTimeString(sellData.buyTime)}}
+                </time>
+                <a class="header-pretitle h6 mb-0" href="https://etherscan.io/tx/{{sellData['txHash']}}" target="_blank"> •
+                  Etherscan<i class="fe fe-external-link ml-2"></i></a>
+              </div>
+
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row justify-content-center mb-4">
+                    <div class="col-6">
+                      <h6 class="header-pretitle mb-2">
+                        Asset price (DAI)
+                      </h6>
+                      <span class="h2 mb-0">
+                        {{isOrderOfType(sellData, 'BasicOrder') ? toBigNumber(sellData.sellPrice).toFormat(6) : assetSymbolToPrice(sellData.tokenSymbol).toFormat(6)}}
+                      </span>
+                    </div>
+                    <div class="col-6">
+                      <h6 class="header-pretitle mb-2">
+                        KRO to redeem
+                      </h6>
+                      <span class="h2 mb-0">
+                        {{sellData.currValue.toFormat(4)}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center mb-4">
+                    <div class="col-6">
+                      <h6 class="header-pretitle mb-2">
+                        DAI to redeem
+                      </h6>
+                      <span class="h2 mb-0">
+                        {{sellData.daiValue.toFormat(4)}}
+                      </span>
+                    </div>
+                    <div class="col-6">
+                      <h6 class="header-pretitle mb-2">
+                        ROI
+                      </h6>
+                      <span class="h2 mb-0">
+                        <span [ngClass]="{'text-success': sellData.ROI.gte(0), 'text-danger': sellData.ROI.lt(0)}">
+                          <i class="fe" [ngClass]="{'fe-arrow-up-right': sellData.ROI.gte(0), 'fe-arrow-down-right': sellData.ROI.lt(0)}"></i> {{sellData.ROI.toFormat(4)}}%
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center" *ngIf="isOrderOfType(sellData, 'FulcrumOrder')">
+                    <div class="col">
+                      <h6 class="header-pretitle mb-2">
+                        Liquidation Price
+                      </h6>
+                      <span class="h2 mb-0 mr-2">
+                        {{toBigNumber(sellData.liquidationPrice).times(assetSymbolToPrice(sellData.tokenSymbol)).div(sellData.sellPrice).toFormat(4)}}
+                      </span>
+                      <span class="badge badge-soft-success" *ngIf="sellData.safety" i18n="@@orderSafetySafe">
+                        Safe
+                      </span>
+                      <span class="badge badge-soft-danger" *ngIf="!sellData.safety" i18n="@@orderSafetyInDanger">
+                        In Danger
+                      </span>
+                      <p class="text-secondary small mt-4 mb-0" i18n="@@investmentsModalSellFulcrumLiquidationText">
+                        If the asset's price reaches the liquidation price, this order will be liquidated, which will cause huge
+                        losses.
+                        When the order is in danger of liquidation, sell it.
+                      </p>
+                    </div>
+                  </div>
+                  <hr class="my-4" *ngIf="isOrderOfType(sellData, 'CompoundOrder')">
+                  <div *ngIf="isOrderOfType(sellData, 'CompoundOrder')">
+                    <div class="row align-items-center justify-content-center mt-4 mb-3">
+                      <div class="col">
+                        <h6 class="header-pretitle mb-0" i18n="@@modalCollateralStatusTitle">
+                          Collateralization status
+                        </h6>
+                      </div>
+                      <div class="col-auto d-flex align-items-center">
+                        <a href="" class="btn btn-sm btn-white" data-toggle="modal" data-target="#modalTopUp"
+                          i18n="@@modalCtaTopUp">Top up</a>
+                      </div>
+                    </div>
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <span class="badge badge-soft-success mb-3" *ngIf="sellData.safety" i18n="@@orderSafetySafe">
+                          Safe
+                        </span>
+                        <span class="badge badge-soft-danger mb-3" *ngIf="!sellData.safety" i18n="@@orderSafetyInDanger">
+                          In Danger
+                        </span>
+                        <div class="progress">
+                          <div [ngClass]="{'bg-success': sellData.safety, 'bg-danger': !sellData.safety}" class="progress-bar"
+                            role="progressbar"
+                            [ngStyle]="{'width': toBigNumber(sellData.collateralRatio).div(sellData.minCollateralRatio).div(2).times(100).toFormat(2) + '%'}">
+                            {{toBigNumber(sellData.collateralRatio).times(100).toFormat(0)}}%</div>
+                        </div>
+                        <div class="row no-gutters justify-content-between text-secondary mb-3">
+                          <div class="col text-left">
+                            <small class="h6">0%</small>
+                            <small class="h6 d-block" i18n="@@orderSafetyInDanger">In Danger</small>
+                          </div>
+                          <div class="col text-left position-absolute d-block w-auto"
+                            style="left: 49.0000%;transform: translateX(-50%);">
+                            <div style="display: flex; flex-direction: column;">
+                              <div style="border: 0.5px dashed #6e84a3; width: 1px; height: 8px; align-self: center;"></div>
+                              <small class="h6">{{sellData.minCollateralRatio.times(100).toFormat(0)}}%&nbsp;•&nbsp;
+                                <ng-container i18n="@@modalMinCollRatio">min. collateral ratio</ng-container></small>
+                            </div>
+                          </div>
+                          <div class="col text-right">
+                            <small class="h6">{{sellData.minCollateralRatio.times(2).times(100).toFormat(0)}}%</small>
+                            <small class="h6 d-block" i18n="@@orderSafetySafe">Safe</small>
+                          </div>
+                        </div>
+                        <p class="text-secondary small mb-0" i18n="@@modalTopUpCollateralLiquidationText">If the order's
+                          collateral ratio falls below the minimum, it will be
+                          liquidated, which will cause huge losses.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-4" *ngIf="isOrderOfType(sellData, 'BasicOrder') || isOrderOfType(sellData, 'FulcrumOrder')">
+                  <div class="form-group" *ngIf="isOrderOfType(sellData, 'BasicOrder') || isOrderOfType(sellData, 'FulcrumOrder')">
+                    <label>KRO to redeem</label>
+                    <div class="input-group mb-2">
+                      <input type="number" min="0.0" max="100.0"
+                      class="form-control form-control-lg border-right-0 pr-0"
+                      aria-describedby="percent of stake to sell" placeholder="0.0" id="sell-percentage-input"
+                      (input)="continueEnabled = true">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-left-0 border-right-0" id="maxSellPercentUnit">%</span>
+                        <button class="btn btn-white" name="button" type="button" (click)="maxSellPercent()"
+                          i18n="@@modalCtaMax">Max</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" *ngIf="(sellData.isShort && isOrderOfType(sellData, 'CompoundOrder')) || !isOrderOfType(sellData, 'CompoundOrder')">
+                    <label>Max. acceptable price</label>
+                    <div class="input-group input-group-lg mb-2">
+                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-right border-left-0" id="">%</span>
+                      </div>
+                    </div>
+                    <small class="form-text text-secondary">Your order WON'T be executed if the price goes up by more than this value.
+                    </small>  
+                  </div>
+                  <div class="form-group" *ngIf="!((sellData.isShort && isOrderOfType(sellData, 'CompoundOrder')) || !isOrderOfType(sellData, 'CompoundOrder'))">
+                    <label>Min. acceptable price</label>
+                    <div class="input-group input-group-lg mb-2">
+                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <div class="input-group-append">
+                        <span class="input-group-text rounded-right border-left-0" id="">%</span>
+                      </div>
+                    </div>
+                    <small class="form-text text-secondary">Your order WON'T be executed if the price goes down by more than this value.
+                    </small>  
+                  </div>
+                  <div class="form-group" *ngIf="selectedOrderType.type === 'basic'">
+                    <label>Liquidity provider</label><br>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="1inch" name="1inch" class="custom-control-input" [checked]="!useKyber"
+                        (input)="useKyber = false;">
+                      <label class="custom-control-label" for="1inch">1inch</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="kybernetwork" name="kybernetwork" class="custom-control-input"
+                        [checked]="useKyber" (input)="useKyber = true;">
+                      <label class="custom-control-label" for="kybernetwork">Kyber Network</label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" aria-label="Sell" (click)="sell()"
+                    [disabled]="!continueEnabled && (isOrderOfType(sellData, 'BasicOrder') || isOrderOfType(sellData, 'FulcrumOrder'))"
+                    i18n="@@investmentsModalSellCtaContinue">
+                    Continue
+                  </button>
+                </div>
+              </div>
+              <a class="btn btn-sm btn-link btn-block mb-6" href="https://gitbook.com" target="_blank">Need help?</a>
+            </div>
+          </div>
+        </div>
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
+          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- / modal -->
+
+
+<!-- Top up collateralization modal -->
+<div class="modal fade fixed-right" id="modalTopUp" tabindex="-1" role="dialog" aria-labelledby="modalTopUp"
+  aria-hidden="true" *ngIf="isOrderOfType(sellData, 'CompoundOrder')">
+  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <!-- Collateralization target title -->
+        <h4 class="modal-title" *ngIf="topupPopupStep == 0" i18n="@@investmentsModalTopUpStep0">
+          Top up your order
+        </h4>
+        <!-- Confirm top up title -->
+        <h4 class="modal-title" *ngIf="topupPopupStep == 1" i18n="@@modalTitleConfirmTx">
+          Confirm transaction
+        </h4>
+        <!-- Processing top up title -->
+        <h4 class="modal-title" *ngIf="topupPopupStep == 2" i18n="@@modalTitleProcessingTx">
+          Processing transaction
+        </h4>
+        <!-- Top up order confirmed title -->
+        <h4 class="modal-title" *ngIf="topupPopupStep == 3" i18n="@@modalTitleTxConfirmed">
+          Transaction confirmed
+        </h4>
+        <!-- Error -->
+        <h4 class="modal-title" *ngIf="topupPopupStep == -1" i18n="@@modalTitleError">
+          That's an error
+        </h4>
+        <!-- Close -->
+        <button type="button" class="close" data-dismiss="modal" i18n-aria-label="@@modalAriaLabelClose"
+          aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <!-- progress bar selling -->
+      <div class="card-header py-0 border-0" style="min-height: 24px;">
+        <div class="progress" style="height: 8px;">
+          <div [ngClass]="{'bg-success': topupPopupStep >= 0, 'bg-secondary': topupPopupStep !== 0}"
+            class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+          <div [ngClass]="{'bg-success': topupPopupStep >= 1, 'bg-secondary': topupPopupStep !== 1}"
+            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+          <div [ngClass]="{'bg-success': topupPopupStep >= 2, 'bg-secondary': topupPopupStep !== 2}"
+            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+          <div [ngClass]="{'bg-success': topupPopupStep >= 3, 'bg-secondary': topupPopupStep !== 3}"
+            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+      </div>
+
+      <div class="modal-body pb-5">
+        <!--Step 0: enter top up amount-->
+        <div *ngIf="topupPopupStep == 0">
+          <div class="row align-items-center justify-content-center mb-3">
+            <div class="col">
+              <h6 class="header-pretitle mb-0" i18n="@@modalCollateralStatusTitle">
+                Collateralization status
+              </h6>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col">
+              <span class="badge badge-soft-success mb-2" *ngIf="sellData.safety" i18n="@@orderSafetySafe">
+                Safe
+              </span>
+              <span class="badge badge-soft-danger mb-2" *ngIf="!sellData.safety" i18n="@@orderSafetyInDanger">
+                In Danger
+              </span>
+              <div class="progress">
+                <div [ngClass]="{'bg-success': sellData.safety, 'bg-danger': !sellData.safety}" class="progress-bar"
+                  role="progressbar"
+                  [ngStyle]="{'width': toBigNumber(sellData.collateralRatio).div(sellData.minCollateralRatio).div(2).times(100).toFormat(2) + '%'}">
+                  {{toBigNumber(sellData.collateralRatio).times(100).toFormat(0)}}%</div>
+              </div>
+              <div class="row no-gutters justify-content-between text-secondary mb-3">
+                <div class="col text-left">
+                  <small class="h6">0%</small>
+                  <small class="h6 d-block" i18n="@@orderSafetyInDanger">In danger</small>
+                </div>
+                <div class="col text-left position-absolute d-block w-auto"
+                  style="left: 49.0000%;transform: translateX(-50%);">
+                  <div style="display: flex; flex-direction: column;">
+                    <div style="border: 0.5px dashed #6e84a3; width: 1px; height: 8px; align-self: center;"></div>
+                    <small class="h6">{{sellData.minCollateralRatio.times(100).toFormat(0)}}%&nbsp;•&nbsp;<ng-container
+                        i18n="@@modalMinCollRatio">min. collateral ratio</ng-container></small>
+                  </div>
+                </div>
+                <div class="col text-right">
+                  <small class="h6">{{sellData.minCollateralRatio.times(2).times(100).toFormat(0)}}%</small>
+                  <small class="h6 d-block" i18n="@@orderSafetySafe">Safe</small>
+                </div>
+              </div>
+              <p class="text-secondary small mb-0" i18n="@@modalTopUpCollateralLiquidationText">If the order's
+                collateral ratio falls below the minimum, it will be
+                liquidated, which will cause huge losses.</p>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- Collateralization target -->
+          <h6 class="header-pretitle" i18n="@@investmentsModalTopUpCollateralTarget">Collateralization target</h6>
+          <div class="row mb-4">
+            <div class="col">
+              <form>
+                <div class="input-group mb-2">
+                  <input type="number" min="0.0" class="form-control form-control-lg border-right-0 pr-0"
+                    aria-describedby="percent of collateralization target" placeholder="0.0"
+                    id="collateral-ratio-target-input" (input)="continueEnabled = true">
+                  <div class="input-group-append">
+                    <span class="input-group-text border-left-0 border-right-0"
+                      id="desiredCollateralizationUnit">%</span>
+                    <button class="btn btn-white" name="button" type="button"
+                      *ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)" (click)="maxTopupTarget()"
+                      i18n="@@modalCtaMax">Max</button>
+                  </div>
+                </div>
+                <small id="kroBalance" class="form-text text-secondary d-inline-block mb-0 mt-1"
+                  *ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)">{{toBigNumber(sellData.currCollateral).div(toBigNumber(sellData.currBorrow).minus(sellData.currCash)).times(100).toFormat(0)}}%&nbsp;•&nbsp;
+                  <ng-container i18n="@@investmentsModalTopUpMaxPossibleCollRatio">Max possible collateral ratio
+                  </ng-container></small>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--Step 1: confirm tx in wallet-->
+        <!-- Confirm tx body -->
+        <!-- loader -->
+        <img class="image-fluid d-block mx-auto mb-4" src="assets/img/animated-logo.svg" alt="Betoken logo"
+          style="width: 88px;" *ngIf="topupPopupStep == 1 || topupPopupStep === 2">
+        <p class="text-center text-muted mb-5" *ngIf="topupPopupStep === 1" i18n="@@modalBodyTextStep1">
+          Confirm the transaction in your wallet’s interface to save it on the Ethereum blockchain. It's fine to stick
+          with these defaults gas limit and price.
+        </p>
+
+        <!--Step 2: tx broadcasted-->
+        <!-- Tx broadcasted body -->
+        <p class="text-center text-muted mb-5" *ngIf="topupPopupStep == 2" i18n="@@modalBodyTextTxBroadcasted">
+          Your transaction is being saved on the Ethereum blockchain.
+        </p>
+
+        <!--Step 3: tx confirmed-->
+        <!-- Asset sold body -->
+        <div *ngIf="topupPopupStep == 3">
+          <p class="h1 text-center">
+            <i class="fe fe-check-circle text-success"></i>
+          </p>
+          <p class="text-center text-muted mb-5" i18n="@@investmentsModalTopUpTextStep3">
+            You have successfully topped up the order.
+          </p>
+        </div>
+
+        <hr *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
+        <form *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
+          <div class="form-group">
+            <label i18n="@@modalBodyTxHash">Transaction hash</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control form-control-lg" value="{{transactionId}}"
+                aria-label="Transaction hash">
+              <div class="input-group-append">
+                <a class="btn btn-white h-100 d-flex align-items-center"
+                  href="https://etherscan.io/tx/{{transactionId}}" target="_blank"><i
+                    class="fe fe-external-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- error -->
+        <div *ngIf="topupPopupStep == -1">
+          <p class="h1 text-center">
+            <i class="fe fe-alert-circle text-danger"></i>
+          </p>
+          <p class="text-center text-muted mb-5" i18n="@@modalErrorText">
+            The operation has resulted in an error. Please try again.
+          </p>
+          <p class="text-center text-muted mb-5">
+            <ng-container i18n="@@modalErrorMsg">Error message:</ng-container>&nbsp;{{errorMsg}}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="topupPopupStep === 0">
+        <!-- Continue button for amount to sell Step -->
+        <button type="submit" class="btn btn-block btn-success mt-auto" aria-label="Topup" (click)="topup()"
+          [disabled]="!continueEnabled" i18n="@@modalCtaContinue">
+          Continue
+        </button>
+      </div>
+      <div class="modal-footer" *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
+        <!-- close button panel after Asset being sold -->
+        <button type="submit" class="btn btn-block btn-white mt-auto" data-dismiss="modal"
+          i18n-aria-label="@@modalAriaLabelClose" aria-label="Close" i18n="@@modalCtaClose">
+          Close
+        </button>
+      </div>
+      <div class="modal-footer" *ngIf="topupPopupStep == -1">
+        <!-- Try again button for error -->
+        <button type="submit" class="btn btn-block btn-white mt-auto" i18n="@@modalTryAgainAriaLabel"
+          aria-label="Try again" (click)="topupPopupStep = 0" i18n="@@modalTryAgain">
+          Try again
+        </button>
+      </div>
+    </div>
+  </div>
+</div><!-- / modal -->

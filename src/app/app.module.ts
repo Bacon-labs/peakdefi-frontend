@@ -8,13 +8,17 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { FundComponent } from './fund/fund.component';
+import { FundActiveTradeComponent } from './fund-active-trade/fund-active-trade.component';
+import { FundTradeHistoryComponent } from './fund-trade-history/fund-trade-history.component';
+import { FundRankingComponent } from './fund-ranking/fund-ranking.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { InvestmentsComponent } from './investments/investments.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { CommissionsComponent } from './commissions/commissions.component';
-import { RankingsComponent } from './rankings/rankings.component';
 import { InvestorComponent } from './investor/investor.component';
 import { ManageronboardingComponent } from './manager-onboarding/manageronboarding.component';
 import { InvestoronboardingComponent } from './investor-onboarding/investoronboarding.component';
@@ -34,6 +38,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'fund',
+    component: FundComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'investments',
     component: InvestmentsComponent,
     pathMatch: 'full'
@@ -46,11 +55,6 @@ const routes: Routes = [
   {
     path: 'commissions',
     component: CommissionsComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'rankings',
-    component: RankingsComponent,
     pathMatch: 'full'
   },
   {
@@ -85,12 +89,16 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
+    FundComponent,
+    FundActiveTradeComponent,
+    FundTradeHistoryComponent,
+    FundRankingComponent,
     SideNavComponent,
     DashboardComponent,
     InvestmentsComponent,
     UpgradeComponent,
     CommissionsComponent,
-    RankingsComponent,
     InvestorComponent,
     InvestoronboardingComponent,
     ManageronboardingComponent,
