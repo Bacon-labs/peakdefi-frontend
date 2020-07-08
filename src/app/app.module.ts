@@ -9,6 +9,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ModalBuyRepTokenComponent } from './modal-buy-rep-token/modal-buy-rep-token.component';
+import { ModalCreateFundComponent } from './modal-create-fund/modal-create-fund.component';
 import { FundComponent } from './fund/fund.component';
 import { FundActiveTradeComponent } from './fund-active-trade/fund-active-trade.component';
 import { FundTradeHistoryComponent } from './fund-trade-history/fund-trade-history.component';
@@ -90,6 +92,8 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ModalBuyRepTokenComponent,
+    ModalCreateFundComponent,
     FundComponent,
     FundActiveTradeComponent,
     FundTradeHistoryComponent,

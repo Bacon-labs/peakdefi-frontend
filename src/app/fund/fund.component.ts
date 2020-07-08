@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { user, timer, manager_actions, tokens, utils } from '../../betokenjs/helpers';
 import BigNumber from 'bignumber.js';
+import { Chart } from 'chart.js';
 import { isUndefined, isNull } from 'util';
 
 import { ApolloEnabled } from '../apollo';

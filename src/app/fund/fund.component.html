@@ -95,11 +95,23 @@
               </div>
             </div>
             <!-- Button -->
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" ype="button" *ngIf="!isManager" i18n="@@ctaBecomeManager" data-toggle="modal" data-target="#buyRepToken">
+              Become a Manager
+            </button>
             <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" data-toggle="modal" data-target="#modalBuy" (click)="openBuyModal(data)">
               <i class="fe fe-plus h3 mr-2 align-bottom"></i> Trade
             </button>
             <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" data-toggle="modal" data-target="#modalSell" (click)="openSellModal(data)">
-              Sell (test)
+              Test Sell
+            </button>
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" data-toggle="modal" data-target="#modalTopUp">
+              Test Top up
+            </button>
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" *ngIf="can_redeem_commission">
+              Test Redeem commission
+            </button>
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" name="button" *ngIf="days == 0 && hours == 0 && minutes == 0 && 1 >= seconds && hasUpdatedTimer" (click)="nextPhase()">
+              Test Next phase
             </button>
             <ul class="nav nav-tabs header-tabs" id="myTab" role="tablist">
               <li class="nav-item">
@@ -150,7 +162,8 @@
         </div>
 
         <div class="chart my-4">
-          <canvas class="chart-canvas" id="overviewChart3"></canvas>
+          <canvas id="roi-chart" class="chart-canvas">
+          </canvas>
         </div>
         <div class="row">
           <div class="col-12 col-lg-6">
@@ -267,7 +280,7 @@
                     </h6>
 
                     <!-- Heading -->
-                    <span class="h2 text-white mb-0 mr-2">
+                    <span class="h2 mb-0 mr-2">
                       <i class="fe fe-arrow-down-right"></i>-7.39%
                     </span>
 
@@ -291,7 +304,7 @@
                     </h6>
 
                     <!-- Heading -->
-                    <span class="h2 text-white mb-0 mr-2">
+                    <span class="h2 mb-0 mr-2">
                       0.1406
                     </span>
 
@@ -366,13 +379,13 @@
                     <tr>
                       <td class="px-0 border-0">
                         <strong>Fund's cycle</strong><br>
-                        <small class="text-white">Management phase</small><br>
-                        <small class="text-white">Investor sell phase</small><br>
+                        <small class="text-secondary">Management phase</small><br>
+                        <small class="text-secondary">Investor sell phase</small><br>
                       </td>
                       <td class="px-0 text-right border-0">
                         30 days <br>
-                        <small class="text-white">27 days</small><br>
-                        <small class="text-white">3 days</small>
+                        <small class="text-secondary">27 days</small><br>
+                        <small class="text-secondary">3 days</small>
                       </td>
                     </tr>
                     <tr>
@@ -419,7 +432,7 @@
     <div class="modal-content">
       <div class="modal-body p-lg-0">
         <div class="d-inline-block w-lg-60">
-          <button class="btn btn-link text-white position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
+          <button class="btn btn-link text-secondary position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
             <i class="fe fe-arrow-left h2"></i>
           </button>
           <div class="row justify-content-center">
@@ -594,7 +607,7 @@
     <div class="modal-content">
       <div class="modal-body p-lg-0">
         <div class="d-inline-block w-lg-60">
-          <button class="btn btn-link text-white position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
+          <button class="btn btn-link text-secondary position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
             <i class="fe fe-arrow-left h2"></i>
           </button>
           <div class="row justify-content-center">
@@ -805,209 +818,110 @@
   </div>
 </div><!-- / modal -->
 
-
 <!-- Top up collateralization modal -->
-<div class="modal fade fixed-right" id="modalTopUp" tabindex="-1" role="dialog" aria-labelledby="modalTopUp"
-  aria-hidden="true" *ngIf="isOrderOfType(sellData, 'CompoundOrder')">
+<div class="modal fade fixed-right" id="modalTopUp" tabindex="-1" role="dialog" aria-labelledby="modalTopUp" aria-hidden="true">
   <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
     <div class="modal-content">
-      <div class="modal-header border-0">
-        <!-- Collateralization target title -->
-        <h4 class="modal-title" *ngIf="topupPopupStep == 0" i18n="@@investmentsModalTopUpStep0">
-          Top up your order
-        </h4>
-        <!-- Confirm top up title -->
-        <h4 class="modal-title" *ngIf="topupPopupStep == 1" i18n="@@modalTitleConfirmTx">
-          Confirm transaction
-        </h4>
-        <!-- Processing top up title -->
-        <h4 class="modal-title" *ngIf="topupPopupStep == 2" i18n="@@modalTitleProcessingTx">
-          Processing transaction
-        </h4>
-        <!-- Top up order confirmed title -->
-        <h4 class="modal-title" *ngIf="topupPopupStep == 3" i18n="@@modalTitleTxConfirmed">
-          Transaction confirmed
-        </h4>
-        <!-- Error -->
-        <h4 class="modal-title" *ngIf="topupPopupStep == -1" i18n="@@modalTitleError">
-          That's an error
-        </h4>
-        <!-- Close -->
-        <button type="button" class="close" data-dismiss="modal" i18n-aria-label="@@modalAriaLabelClose"
-          aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <!-- progress bar selling -->
-      <div class="card-header py-0 border-0" style="min-height: 24px;">
-        <div class="progress" style="height: 8px;">
-          <div [ngClass]="{'bg-success': topupPopupStep >= 0, 'bg-secondary': topupPopupStep !== 0}"
-            class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-          <div [ngClass]="{'bg-success': topupPopupStep >= 1, 'bg-secondary': topupPopupStep !== 1}"
-            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-          <div [ngClass]="{'bg-success': topupPopupStep >= 2, 'bg-secondary': topupPopupStep !== 2}"
-            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-          <div [ngClass]="{'bg-success': topupPopupStep >= 3, 'bg-secondary': topupPopupStep !== 3}"
-            class="progress-bar border-left" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div>
+      <div class="modal-body p-lg-0">
+        <div class="d-inline-block w-lg-60">
+          <button class="btn btn-link text-secondary position-absolute mt-n4 ml-n4 ml-lg-0 mt-lg-0" type="button" name="button" data-dismiss="modal" aria-label="Close">
+            <i class="fe fe-arrow-left h2"></i>
+          </button>
+          <div class="row justify-content-center">
+            <div class="col col-lg-8">
+              <!-- Heading -->
+              <h1 class="display-4 text-center mt-5">
+                Top up position
+              </h1>
 
-      <div class="modal-body pb-5">
-        <!--Step 0: enter top up amount-->
-        <div *ngIf="topupPopupStep == 0">
-          <div class="row align-items-center justify-content-center mb-3">
-            <div class="col">
-              <h6 class="header-pretitle mb-0" i18n="@@modalCollateralStatusTitle">
-                Collateralization status
-              </h6>
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col">
-              <span class="badge badge-soft-success mb-2" *ngIf="sellData.safety" i18n="@@orderSafetySafe">
-                Safe
-              </span>
-              <span class="badge badge-soft-danger mb-2" *ngIf="!sellData.safety" i18n="@@orderSafetyInDanger">
-                In Danger
-              </span>
-              <div class="progress">
-                <div [ngClass]="{'bg-success': sellData.safety, 'bg-danger': !sellData.safety}" class="progress-bar"
-                  role="progressbar"
-                  [ngStyle]="{'width': toBigNumber(sellData.collateralRatio).div(sellData.minCollateralRatio).div(2).times(100).toFormat(2) + '%'}">
-                  {{toBigNumber(sellData.collateralRatio).times(100).toFormat(0)}}%</div>
-              </div>
-              <div class="row no-gutters justify-content-between text-secondary mb-3">
-                <div class="col text-left">
-                  <small class="h6">0%</small>
-                  <small class="h6 d-block" i18n="@@orderSafetyInDanger">In danger</small>
-                </div>
-                <div class="col text-left position-absolute d-block w-auto"
-                  style="left: 49.0000%;transform: translateX(-50%);">
-                  <div style="display: flex; flex-direction: column;">
-                    <div style="border: 0.5px dashed #6e84a3; width: 1px; height: 8px; align-self: center;"></div>
-                    <small class="h6">{{sellData.minCollateralRatio.times(100).toFormat(0)}}%&nbsp;•&nbsp;<ng-container
-                        i18n="@@modalMinCollRatio">min. collateral ratio</ng-container></small>
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row align-items-center justify-content-center mb-3">
+                    <div class="col">
+                      <h6 class="header-pretitle mb-0" i18n="@@modalCollateralStatusTitle">
+                        Collateralization status
+                      </h6>
+                    </div>
                   </div>
-                </div>
-                <div class="col text-right">
-                  <small class="h6">{{sellData.minCollateralRatio.times(2).times(100).toFormat(0)}}%</small>
-                  <small class="h6 d-block" i18n="@@orderSafetySafe">Safe</small>
-                </div>
-              </div>
-              <p class="text-secondary small mb-0" i18n="@@modalTopUpCollateralLiquidationText">If the order's
-                collateral ratio falls below the minimum, it will be
-                liquidated, which will cause huge losses.</p>
-            </div>
-          </div>
-
-          <hr class="my-4">
-
-          <!-- Collateralization target -->
-          <h6 class="header-pretitle" i18n="@@investmentsModalTopUpCollateralTarget">Collateralization target</h6>
-          <div class="row mb-4">
-            <div class="col">
-              <form>
-                <div class="input-group mb-2">
-                  <input type="number" min="0.0" class="form-control form-control-lg border-right-0 pr-0"
-                    aria-describedby="percent of collateralization target" placeholder="0.0"
-                    id="collateral-ratio-target-input" (input)="continueEnabled = true">
-                  <div class="input-group-append">
-                    <span class="input-group-text border-left-0 border-right-0"
-                      id="desiredCollateralizationUnit">%</span>
-                    <button class="btn btn-white" name="button" type="button"
-                      *ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)" (click)="maxTopupTarget()"
-                      i18n="@@modalCtaMax">Max</button>
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <span class="badge badge-soft-success mb-4" *ngIf="sellData.safety" i18n="@@orderSafetySafe">
+                        Safe
+                      </span>
+                      <span class="badge badge-soft-danger mb-4" *ngIf="!sellData.safety" i18n="@@orderSafetyInDanger">
+                        In Danger
+                      </span>
+                      <div class="progress">
+                        <div [ngClass]="{'bg-success': sellData.safety, 'bg-danger': !sellData.safety}" class="progress-bar"
+                          role="progressbar"
+                          [ngStyle]="{'width': toBigNumber(sellData.collateralRatio).div(sellData.minCollateralRatio).div(2).times(100).toFormat(2) + '%'}">
+                          {{toBigNumber(sellData.collateralRatio).times(100).toFormat(0)}}%</div>
+                      </div>
+                      <div class="row no-gutters justify-content-between text-secondary mb-3">
+                        <div class="col text-left">
+                          <small class="h6">0%</small>
+                          <small class="h6 d-block" i18n="@@orderSafetyInDanger">In danger</small>
+                        </div>
+                        <div class="col text-left position-absolute d-block w-auto"
+                          style="left: 49.0000%;transform: translateX(-50%);">
+                          <div style="display: flex; flex-direction: column;">
+                            <div style="border: 0.5px dashed #6e84a3; width: 1px; height: 8px; align-self: center;"></div>
+                            <small class="h6">{{sellData.minCollateralRatio.times(100).toFormat(0)}}%&nbsp;•&nbsp;<ng-container
+                                i18n="@@modalMinCollRatio">min. collateral ratio</ng-container></small>
+                          </div>
+                        </div>
+                        <div class="col text-right">
+                          <small class="h6">{{sellData.minCollateralRatio.times(2).times(100).toFormat(0)}}%</small>
+                          <small class="h6 d-block" i18n="@@orderSafetySafe">Safe</small>
+                        </div>
+                      </div>
+                      <p class="text-secondary small mb-0" i18n="@@modalTopUpCollateralLiquidationText">If the order's
+                        collateral ratio falls below the minimum, it will be
+                        liquidated, which will cause huge losses.</p>
+                    </div>
                   </div>
+        
+                  <hr class="my-4">
+        
+                  <!-- Collateralization target -->
+                  <div class="form-group">
+                    <label>Collateralization target</label>
+                    <div class="input-group input-group-lg mb-2">
+                      <input type="number" min="0.0" class="form-control form-control-lg border-right-0 pr-0"
+                        aria-describedby="percent of collateralization target" placeholder="0.0"
+                        id="collateral-ratio-target-input" (input)="continueEnabled = true">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-left-0 border-right-0"
+                          id="desiredCollateralizationUnit">%</span>
+                        <button class="btn btn-white" name="button" type="button"
+                          *ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)" (click)="maxTopupTarget()"
+                          i18n="@@modalCtaMax">Max</button>
+                      </div>
+                    </div>
+                    <small id="kroBalance" class="form-text text-secondary"*ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)">{{toBigNumber(sellData.currCollateral).div(toBigNumber(sellData.currBorrow).minus(sellData.currCash)).times(100).toFormat(0)}}%&nbsp;•&nbsp;
+                      <ng-container i18n="@@investmentsModalTopUpMaxPossibleCollRatio">Max possible collateral ratio
+                      </ng-container>
+                    </small>  
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" aria-label="Topup" (click)="topup()"
+                    [disabled]="!continueEnabled" i18n="@@modalCtaContinue">
+                    Continue
+                  </button>
                 </div>
-                <small id="kroBalance" class="form-text text-secondary d-inline-block mb-0 mt-1"
-                  *ngIf="toBigNumber(sellData.currCash).lt(sellData.currBorrow)">{{toBigNumber(sellData.currCollateral).div(toBigNumber(sellData.currBorrow).minus(sellData.currCash)).times(100).toFormat(0)}}%&nbsp;•&nbsp;
-                  <ng-container i18n="@@investmentsModalTopUpMaxPossibleCollRatio">Max possible collateral ratio
-                  </ng-container></small>
-              </form>
+              </div>
+              <a class="btn btn-sm btn-link btn-block mb-6" href="https://gitbook.com" target="_blank">Need help?</a>
             </div>
           </div>
         </div>
-
-        <!--Step 1: confirm tx in wallet-->
-        <!-- Confirm tx body -->
-        <!-- loader -->
-        <img class="image-fluid d-block mx-auto mb-4" src="assets/img/animated-logo.svg" alt="Betoken logo"
-          style="width: 88px;" *ngIf="topupPopupStep == 1 || topupPopupStep === 2">
-        <p class="text-center text-muted mb-5" *ngIf="topupPopupStep === 1" i18n="@@modalBodyTextStep1">
-          Confirm the transaction in your wallet’s interface to save it on the Ethereum blockchain. It's fine to stick
-          with these defaults gas limit and price.
-        </p>
-
-        <!--Step 2: tx broadcasted-->
-        <!-- Tx broadcasted body -->
-        <p class="text-center text-muted mb-5" *ngIf="topupPopupStep == 2" i18n="@@modalBodyTextTxBroadcasted">
-          Your transaction is being saved on the Ethereum blockchain.
-        </p>
-
-        <!--Step 3: tx confirmed-->
-        <!-- Asset sold body -->
-        <div *ngIf="topupPopupStep == 3">
-          <p class="h1 text-center">
-            <i class="fe fe-check-circle text-success"></i>
-          </p>
-          <p class="text-center text-muted mb-5" i18n="@@investmentsModalTopUpTextStep3">
-            You have successfully topped up the order.
-          </p>
-        </div>
-
-        <hr *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
-        <form *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
-          <div class="form-group">
-            <label i18n="@@modalBodyTxHash">Transaction hash</label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control form-control-lg" value="{{transactionId}}"
-                aria-label="Transaction hash">
-              <div class="input-group-append">
-                <a class="btn btn-white h-100 d-flex align-items-center"
-                  href="https://etherscan.io/tx/{{transactionId}}" target="_blank"><i
-                    class="fe fe-external-link"></i></a>
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
+          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
               </div>
             </div>
           </div>
-        </form>
-
-        <!-- error -->
-        <div *ngIf="topupPopupStep == -1">
-          <p class="h1 text-center">
-            <i class="fe fe-alert-circle text-danger"></i>
-          </p>
-          <p class="text-center text-muted mb-5" i18n="@@modalErrorText">
-            The operation has resulted in an error. Please try again.
-          </p>
-          <p class="text-center text-muted mb-5">
-            <ng-container i18n="@@modalErrorMsg">Error message:</ng-container>&nbsp;{{errorMsg}}
-          </p>
         </div>
-      </div>
-      <div class="modal-footer" *ngIf="topupPopupStep === 0">
-        <!-- Continue button for amount to sell Step -->
-        <button type="submit" class="btn btn-block btn-success mt-auto" aria-label="Topup" (click)="topup()"
-          [disabled]="!continueEnabled" i18n="@@modalCtaContinue">
-          Continue
-        </button>
-      </div>
-      <div class="modal-footer" *ngIf="topupPopupStep === 2 || topupPopupStep === 3">
-        <!-- close button panel after Asset being sold -->
-        <button type="submit" class="btn btn-block btn-white mt-auto" data-dismiss="modal"
-          i18n-aria-label="@@modalAriaLabelClose" aria-label="Close" i18n="@@modalCtaClose">
-          Close
-        </button>
-      </div>
-      <div class="modal-footer" *ngIf="topupPopupStep == -1">
-        <!-- Try again button for error -->
-        <button type="submit" class="btn btn-block btn-white mt-auto" i18n="@@modalTryAgainAriaLabel"
-          aria-label="Try again" (click)="topupPopupStep = 0" i18n="@@modalTryAgain">
-          Try again
-        </button>
       </div>
     </div>
   </div>
