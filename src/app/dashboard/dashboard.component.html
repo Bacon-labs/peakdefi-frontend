@@ -27,9 +27,9 @@
               </div>
             </div>
             <!-- Button -->
-            <a href="#" data-toggle="modal" data-target="#buyRepToken" class="btn btn-lg btn-primary lift mb-3">
-              <i class="fe fe-zap h3 mr-2 align-bottom"></i> Become manager
-            </a>
+            <button class="btn btn-lg btn-primary lift mb-5 mr-3" type="button" *ngIf="!isManager" i18n="@@ctaBecomeManager" data-toggle="modal" data-target="#buyRepToken">
+              Become a Manager
+            </button>
             <div class="card-deck my-4">
               <div class="card">
                 <div class="card-body">

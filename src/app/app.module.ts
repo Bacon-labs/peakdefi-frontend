@@ -31,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/investments',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { user, timer, manager_actions } from '../../betokenjs/helpers';
+import { user, timer, manager_actions, refresh_actions } from '../../betokenjs/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { ApolloEnabled } from '../apollo';
@@ -25,6 +25,8 @@ export class SideNavComponent extends ApolloEnabled implements OnInit {
   isManager: Boolean;
   hasUpdatedTimer: Boolean;
 
+  user_address: String;
+
   constructor(private router: Router, private apollo: Apollo) {
     super();
     this.days = 0;
@@ -36,6 +38,8 @@ export class SideNavComponent extends ApolloEnabled implements OnInit {
     this.isManager = true;
     this.can_redeem_commission = false;
     this.hasUpdatedTimer = false;
+
+    this.user_address = this.ZERO_ADDR;
   }
 
   ngOnInit() {
@@ -54,6 +58,7 @@ export class SideNavComponent extends ApolloEnabled implements OnInit {
 
   refreshDisplay() {
     let userAddress = user.address().toLowerCase();
+    this.user_address = user.address();
     this.querySubscription = this.apollo
       .watchQuery({
         pollInterval: this.pollInterval,
@@ -91,5 +96,10 @@ export class SideNavComponent extends ApolloEnabled implements OnInit {
 
   nextPhase() {
     manager_actions.nextPhase();
+  }
+
+  async reloadAll() {
+    await refresh_actions.reload_all();
+    this.refreshDisplay();
   }
 }
