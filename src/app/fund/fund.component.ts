@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { user, timer, manager_actions, tokens, utils } from '../../betokenjs/helpers';
 import BigNumber from 'bignumber.js';
+import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { isUndefined, isNull } from 'util';
 
@@ -51,7 +52,7 @@ export class FundComponent extends ApolloEnabled implements OnInit {
   errorMsg: String;
   isLoading: Boolean;
 
-  constructor(private apollo: Apollo) {
+  constructor(private router: Router, private apollo: Apollo) {
       super();
 
       this.createInvestmentPopupStep = 0;

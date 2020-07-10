@@ -10,15 +10,17 @@
           <div class="col">
             <div class="row justify-content-between align-items-center mb-2">
               <div class="col">
-                <!-- Pretitle -->
-                <div class="text-secondary">
-                  Fund 1
-                </div>
+                <nav aria-label="breadcrumb" *ngIf="router.url === '/fund'">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/dashboard">Portfolio</a></li>
+                    <li class="breadcrumb-item active" aria-current="fund">Fund title</li>
+                  </ol>
+                </nav>
                 <h1 class="display-3 mt-3 mb-0 d-none d-lg-block">
-                  {{portfolioValueInDAI.toFormat(4)}}
+                  ${{portfolioValueInDAI.toFormat(4)}}
                 </h1>
                 <h1 class="display-4 mt-3 d-block d-lg-none">
-                  {{portfolioValueInDAI.toFormat(4)}}
+                  ${{portfolioValueInDAI.toFormat(4)}}
                 </h1>
                 <!-- Pretitle -->
                 <div class="dropdown mb-0 d-flex align-items-center text-secondary mb-2">
