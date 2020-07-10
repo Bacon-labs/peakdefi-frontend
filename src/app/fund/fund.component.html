@@ -428,7 +428,7 @@
 
 <!-- ModalBuy -->
 <div class="modal fade fixed-right" id="modalBuy" tabindex="-1" role="dialog" aria-labelledby="modalBuy" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+  <div class="modal-dialog modal-dialog-vertical" role="document">
     <div class="modal-content">
       <div class="modal-body p-lg-0">
         <div class="d-inline-block w-lg-60">
@@ -486,7 +486,7 @@
                   <div class="form-group" *ngIf="(selectedOrderType.leverage > 0 && selectedOrderType.type === 'compound') || selectedOrderType.type !== 'compound'">
                     <label>Max. acceptable price</label>
                     <div class="input-group input-group-lg mb-2">
-                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <input type="number" class="form-control form-control-lg border-right-0" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
                       <div class="input-group-append">
                         <span class="input-group-text rounded-right border-left-0" id="">%</span>
                       </div>
@@ -497,7 +497,7 @@
                   <div class="form-group" *ngIf="!((selectedOrderType.leverage > 0 && selectedOrderType.type === 'compound') || selectedOrderType.type !== 'compound')">
                     <label>Min. acceptable price</label>
                     <div class="input-group input-group-lg mb-2">
-                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <input type="number" class="form-control form-control-lg border-right-0" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
                       <div class="input-group-append">
                         <span class="input-group-text rounded-right border-left-0" id="">%</span>
                       </div>
@@ -587,8 +587,8 @@
             </div>
           </div>
         </div>
-        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
-          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none border-left">
+          <div class="bg-lighter vh-100 p-4 d-flex align-items-center">
             <div class="row justify-content-center">
               <div class="col-10">
                 <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
@@ -603,7 +603,7 @@
 
 <!-- Sell modal -->
 <div class="modal fade fixed-right" id="modalSell" tabindex="-1" role="dialog" aria-labelledby="modalSell" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+  <div class="modal-dialog modal-dialog-vertical" role="document">
     <div class="modal-content">
       <div class="modal-body p-lg-0">
         <div class="d-inline-block w-lg-60">
@@ -761,7 +761,7 @@
                   <div class="form-group" *ngIf="(sellData.isShort && isOrderOfType(sellData, 'CompoundOrder')) || !isOrderOfType(sellData, 'CompoundOrder')">
                     <label>Max. acceptable price</label>
                     <div class="input-group input-group-lg mb-2">
-                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <input type="number" class="form-control form-control-lg border-right-0" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
                       <div class="input-group-append">
                         <span class="input-group-text rounded-right border-left-0" id="">%</span>
                       </div>
@@ -772,7 +772,7 @@
                   <div class="form-group" *ngIf="!((sellData.isShort && isOrderOfType(sellData, 'CompoundOrder')) || !isOrderOfType(sellData, 'CompoundOrder'))">
                     <label>Min. acceptable price</label>
                     <div class="input-group input-group-lg mb-2">
-                      <input type="number" class="form-control form-control-lg" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
+                      <input type="number" class="form-control form-control-lg border-right-0" min="0.0" value="3" placeholder="0.00" aria-label="" aria-describedby="">
                       <div class="input-group-append">
                         <span class="input-group-text rounded-right border-left-0" id="">%</span>
                       </div>
@@ -804,8 +804,8 @@
             </div>
           </div>
         </div>
-        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
-          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none border-left">
+          <div class="bg-lighter vh-100 p-4 d-flex align-items-center">
             <div class="row justify-content-center">
               <div class="col-10">
                 <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
@@ -820,7 +820,7 @@
 
 <!-- Top up collateralization modal -->
 <div class="modal fade fixed-right" id="modalTopUp" tabindex="-1" role="dialog" aria-labelledby="modalTopUp" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical bg-white" role="document">
+  <div class="modal-dialog modal-dialog-vertical" role="document">
     <div class="modal-content">
       <div class="modal-body p-lg-0">
         <div class="d-inline-block w-lg-60">
@@ -913,8 +913,8 @@
             </div>
           </div>
         </div>
-        <div class="d-lg-inline-block w-lg-40 position-fixed d-none">
-          <div class="bg-white vh-100 p-4 d-flex align-items-center">
+        <div class="d-lg-inline-block w-lg-40 position-fixed d-none border-left">
+          <div class="bg-lighter vh-100 p-4 d-flex align-items-center">
             <div class="row justify-content-center">
               <div class="col-10">
                 <img class="img-fluid " src="assets/img/illustrations/undraw_stock_prices_afrt.svg" alt="...">
