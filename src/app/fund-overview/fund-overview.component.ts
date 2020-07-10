@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { BigNumber } from 'bignumber.js';
 import { Chart } from 'chart.js';
 
 declare var $: any;;
 
 import {
-  user
-} from '../../betokenjs/helpers';
+    user, timer, error_notifications, manager_actions, refresh_actions
+  } from '../../betokenjs/helpers';
 
 import { ApolloEnabled } from '../apollo';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html'
+  selector: 'app-fund-overview',
+  templateUrl: './fund-overview.component.html'
 })
 
-export class DashboardComponent extends ApolloEnabled implements OnInit {
+export class FundOverviewComponent extends ApolloEnabled implements OnInit {
   userRanking: String;
   userValue: BigNumber;
   userROI: BigNumber;
@@ -27,6 +29,7 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
   currMoROI: BigNumber;
   totalUser: Number;
   AUM: BigNumber;
+  maxDrawdown: BigNumber;
   sortinoRatio: BigNumber;
   standardDeviation: BigNumber;
   portfolioValueInDAI: BigNumber;
@@ -40,7 +43,13 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
   aumHistory: any;
   historyWindowSize: number;
 
-  constructor(private apollo: Apollo) {
+  days: Number;
+  hours: Number;
+  minutes: Number;
+  seconds: Number;
+  phase: Number;
+
+  constructor(private ms: AppComponent, private router: Router, private apollo: Apollo) {
     super();
 
     this.userRanking = '';
@@ -52,6 +61,7 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
     this.currMoROI = new BigNumber(0);
     this.totalUser = 0;
     this.AUM = new BigNumber(0);
+    this.maxDrawdown = new BigNumber(0);
     this.sortinoRatio = new BigNumber(0);
     this.standardDeviation = new BigNumber(0);
     this.portfolioValueInDAI = new BigNumber(0);
@@ -61,11 +71,18 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
     this.chartTabId = 0;
     this.shouldDrawChart = true;
     this.historyWindowSize = 1000;
+
+    this.days = 0;
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0;
+    this.phase = -1;
   }
 
   ngOnInit() {
     this.createQuery();
     $('[data-toggle="tooltip"]').tooltip();
+    setInterval(() => this.updateTimer(), 1000);
   }
 
   createQuery() {
@@ -162,9 +179,24 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
       this.chartDraw(this.chartTabId);
     }
   }
+  updateTimer() {
+    this.days = timer.day();
+    this.hours = timer.hour();
+    this.minutes = timer.minute();
+    this.seconds = timer.second();
+  }
 
   refreshDisplay() {
     this.query.refetch().then((result) => this.handleQuery(result));
+    this.phase = timer.phase();
+  }
+
+  nextPhase() {
+    manager_actions.nextPhase();
+  }
+  async reloadAll() {
+    await refresh_actions.reload_all();
+    this.refreshDisplay();
   }
 
   switchChartTab(id) {
@@ -204,6 +236,16 @@ export class DashboardComponent extends ApolloEnabled implements OnInit {
 
     if (sharesPriceList.length > 0) {
       this.avgMonthReturn = this.sharesPrice.div(sharesPriceList[0]).minus(1).times(100);
+    }
+
+    // max drawdown
+    this.maxDrawdown = new BigNumber(0);
+    for (let i = 0; i < sharesPriceList.length; i++) {
+        let cumulativeMax = sharesPriceList.slice(0, i + 1).reduce((accumulator, curr) => BigNumber.max(accumulator, curr), new BigNumber(0)); // max of sharesPriceList[:i+1]
+        let drawdown = sharesPriceList[i].minus(cumulativeMax).div(cumulativeMax).times(100);
+        if (drawdown.lt(this.maxDrawdown)) {
+        this.maxDrawdown = drawdown;
+        }
     }
   }
 

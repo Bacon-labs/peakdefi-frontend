@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ModalBuyRepTokenComponent } from './modal-buy-rep-token/modal-buy-rep-token.component';
 import { ModalCreateFundComponent } from './modal-create-fund/modal-create-fund.component';
 import { FundComponent } from './fund/fund.component';
+import { FundOverviewComponent } from './fund-overview/fund-overview.component';
 import { FundActiveTradeComponent } from './fund-active-trade/fund-active-trade.component';
 import { FundTradeHistoryComponent } from './fund-trade-history/fund-trade-history.component';
 import { FundRankingComponent } from './fund-ranking/fund-ranking.component';
@@ -95,6 +96,7 @@ const routes: Routes = [
     ModalBuyRepTokenComponent,
     ModalCreateFundComponent,
     FundComponent,
+    FundOverviewComponent,
     FundActiveTradeComponent,
     FundTradeHistoryComponent,
     FundRankingComponent,

@@ -1,0 +1,274 @@
+<div class="row">
+  <div class="col-12 col-lg">
+    <div class="text-secondary mb-2">
+      Share price &bull; USD
+    </div>
+    <h2 class="h1 d-none d-lg-block">${{sharesPrice.toFormat(4)}} <span class="small align-top"[ngClass]="{'text-success': currMoROI.gte(0), 'text-danger': currMoROI.lt(0)}">
+      <i class="fe" [ngClass]="{'fe-arrow-up-right': currMoROI.gte(0), 'fe-arrow-down-right': currMoROI.lt(0)}"></i>{{currMoROI.toFormat(4)}}% this month</span></h2>
+    <h2 class="h2 d-block d-lg-none">${{sharesPrice.toFormat(4)}} <span class="small align-top"[ngClass]="{'text-success': currMoROI.gte(0), 'text-danger': currMoROI.lt(0)}">
+      <i class="fe" [ngClass]="{'fe-arrow-up-right': currMoROI.gte(0), 'fe-arrow-down-right': currMoROI.lt(0)}"></i>{{currMoROI.toFormat(4)}}% this month</span></h2>
+  </div>
+  <div class="col-12 mb-4 mb-lg-0 col-lg-auto">
+    <div class="btn-group-toggle d-flex" data-toggle="buttons">
+      <label class="btn btn-white btn-sm col">
+        <input type="radio" name="navColor" id="" value=""> 1D
+      </label>
+      <label class="btn btn-white btn-sm col ml-2">
+        <input type="radio" name="navColor" id="" value=""> 1W
+      </label>
+      <label class="btn btn-white btn-sm col ml-2 active">
+        <input type="radio" name="navColor" id="" value=""> 1M
+      </label>
+      <label class="btn btn-white btn-sm col ml-2">
+        <input type="radio" name="navColor" id="" value=""> 1A
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="chart my-4">
+  <canvas id="roi-chart" class="chart-canvas">
+  </canvas>
+</div>
+<div class="row">
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              PRICE CHANGE (CURRENT CYCLE)
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2" [ngClass]="{'text-success': currMoROI.gte(0), 'text-danger': currMoROI.lt(0)}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': currMoROI.gte(0), 'fe-arrow-down-right': currMoROI.lt(0)}"></i>{{currMoROI.toFormat(4)}}%
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              APY
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2" [ngClass]="{'text-success': apy.gte(0), 'text-danger': apy.lt(0)}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': apy.gte(0), 'fe-arrow-down-right': apy.lt(0)}"></i>{{apy.toFixed(2)}}%
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+</div> <!-- / .row -->
+<div class="row">
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              PRICE CHANGE (Since inception)
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2" [ngClass]="{'text-success': avgMonthReturn.gte(0), 'text-danger': avgMonthReturn.lt(0)}">
+              <i class="fe" [ngClass]="{'fe-arrow-up-right': avgMonthReturn.gte(0), 'fe-arrow-down-right': avgMonthReturn.lt(0)}"></i>{{avgMonthReturn.toFormat(4)}}%
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              Assets under management (DAI)
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2">
+              {{AUM.toFormat(4)}}
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+</div> <!-- / .row -->
+<div class="row">
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              MAX DRAWDOWN
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2">
+              <i class="fe fe-arrow-down-right"></i>{{maxDrawdown.toFormat(4)}}%
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 col-lg-6">
+
+    <!-- stat -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col mb-3 mb-lg-0">
+
+            <!-- Title -->
+            <h6 class="text-uppercase text-secondary mb-2">
+              STANDARD DEVIATION
+            </h6>
+
+            <!-- Heading -->
+            <span class="h2 mb-0 mr-2">
+              0.1406
+            </span>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div>
+
+  </div>
+</div> <!-- / .row -->
+<div class="row">
+  <div class="col-12">
+    <!-- fund details -->
+    <div class="card">
+      <div class="card-header">
+        <div class="row align-items-center">
+          <div class="col">
+
+            <!-- Title -->
+            <h4 class="card-header-title">
+              Fund details
+            </h4>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+      <div class="card-body">
+        
+      <div class="table-responsive mb-0">
+        <table class="table mb-0">
+          <tbody>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Fund address</strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                <a class="d-block text-truncate ml-auto" href="#" target="_blank" style="width: 6rem;">0x5200000000000000000000</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Management fee</strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                0.1% of AUM
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Success fee</strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                20.0% of profit
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Redemption fee</strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                0%
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Fees period</strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                27 days
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong>Fund's cycle</strong><br>
+                <small class="text-secondary">Management phase</small><br>
+                <small class="text-secondary">Investor sell phase</small><br>
+              </td>
+              <td class="px-0 text-right border-0">
+                30 days <br>
+                <small class="text-secondary">27 days</small><br>
+                <small class="text-secondary">3 days</small>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-0 border-0">
+                <strong><ng-container i18n="@@timeCounterTitle">Time left</ng-container>&nbsp;<ng-container *ngIf="phase == 0"
+                  i18n="@@timeCounterActionIntermission">until managing begins</ng-container>
+                <ng-container *ngIf="phase == 1" i18n="@@timeCounterActionManage">to manage</ng-container></strong>
+              </td>
+              <td class="px-0 text-right border-0">
+                {{days}}<ng-container i18n="@@timeLeftInDays">d</ng-container>&nbsp;{{hours}}<ng-container
+                  i18n="@@timeLeftInHours">h</ng-container>&nbsp;{{minutes}}<ng-container i18n="@@timeLeftInMinutes">m
+                </ng-container>&nbsp;{{seconds}}<ng-container i18n="@@timeLeftInSeconds">s</ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
